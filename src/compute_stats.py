@@ -2,6 +2,9 @@ import json
 from pathlib import Path
 import torch
 from torch.utils.data import DataLoader
+from torchvision import transforms
+from config import DATA_DIR, IMAGE_SIZE
+
 
 def compute_mean_std(dataset, batch_size=16, num_workers=2, device='cpu'):
     """Compute per-channel mean and std over a dataset. Dataset must return tensors (C,H,W) scaled to [0,1].
@@ -54,3 +57,24 @@ def load_stats(path=None):
     with open(path) as f:
         d = json.load(f)
     return d.get('mean'), d.get('std')
+
+#실행
+if __name__ == '__main__':
+    from src.data import OASISDataset
+    
+    # 데이터셋 로드 (train split)
+    transform = transforms.Compose([
+        transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
+        transforms.ToTensor(),
+    ])
+    train_dataset = OASISDataset(root_dir=DATA_DIR, split='train', transform=transform)
+
+    # 통계량 계산
+    mean, std = compute_mean_std(train_dataset, batch_size=32, num_workers=4, device='cpu')
+    print(f'Computed mean: {mean}, std: {std}')
+
+    # 저장
+    save_path = save_stats(mean, std, out_path='train_norm_stats.json')
+    print(f'Saved normalization stats to {save_path}')
+
+    

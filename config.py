@@ -7,8 +7,8 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 SEED = 42
 
 # --- 경로 설정 ---
-# Colab 경로
-DATA_DIR = '/content/drive/MyDrive/25_AML_OASIS_dataset/input'
+# Colab 경로로 수정하기
+DATA_DIR = 'input' #'/content/drive/MyDrive/25_AML_OASIS_dataset/input'
 # 로컬 경로
 CVAE_MODEL_PATH = "saved_models/best_cvae.pth"
 # 로컬 경로 - classifier 관련 경로
