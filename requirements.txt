@@ -1,0 +1,17 @@
+# --- Core PyTorch ---
+torch>=2.0.0
+# Colab에서 실행할 경우 CUDA 버전과 호환되는 torch 버전을 명시할 필요가 있습니다.
+# 예: torch==2.1.0+cu121 (Colab의 경우)
+
+# --- AI/Computer Vision Libraries ---
+timm>=0.9.0             # Pretrained Classifier (ResNet 등) 로드에 사용
+lpips>=0.1.4            # LPIPS Loss 계산에 사용
+
+# --- Data Handling & Utilities ---
+numpy>=1.24.0           # 배열 계산
+Pillow>=10.0.0          # PIL (이미지 로드)
+torchvision>=0.15.0     # transforms 등
+tqdm>=4.66.0            # 학습 진행률 표시줄
+
+# --- Visualization ---
+matplotlib>=3.7.0       # 결과 시각화 및 그래프 저장
